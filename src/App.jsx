@@ -17,19 +17,16 @@ function App() {
         </div>
         <p className="text-bold text-[#FD8C00] text-3xl">Attendance System </p>
         <div className="flex justify-between ">
-          <button className="bg-[#FD8C00] p-3 rounded  text-white hover:bg-[#e27e03] mx-2">
-            Join the team
-          </button>
           <button className="bg-[#FD8C00] p-3 rounded  text-white hover:bg-[#e27e03]">
             Join the team
           </button>
         </div>
       </nav>
-      <div className=" flex flex-col justify-evenly items-center rounded-xl shadow-lg mt-24 mx-auto w-[29rem] h-[20rem] pt-5">
+      <div className=" flex flex-col justify-evenly items-center rounded-4xl shadow-2xl mt-28 mx-auto w-[29rem] h-[20rem] pt-5">
         <div className="text-xl">Enter your Attendance</div>
         <Input name="Enter Reg Number" />
         <button className="px-5 py-3 bg-[#FD8C00] rounded text-white">
-          Register
+          Click here
         </button>
       </div>
     </div>
