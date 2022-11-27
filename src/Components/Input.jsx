@@ -3,7 +3,7 @@ import React from "react";
 const Input = (props) => {
   return (
     <div>
-      <div className="w-[24rem]">
+      <div className="w-[22rem]">
         <label
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 "
