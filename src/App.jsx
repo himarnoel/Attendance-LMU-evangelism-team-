@@ -35,7 +35,7 @@ function App() {
         </div>
       </div>
 
-      <div className=" border border-[#FD8C00] flex flex-col justify-evenly items-center rounded-xl shadow-xl mt-[8rem] lg:mt-32 mx-auto lg:w-[30rem] w-[23rem] h-[20rem] pt-5">
+      <div className="  flex flex-col justify-evenly items-center rounded-xl shadow-xl mt-[8rem] lg:mt-32 mx-auto lg:w-[30rem] w-[23rem] h-[20rem] pt-5">
         <div className="text-xl">Enter your Attendance</div>
         <Input name="Enter Reg Number" />
         <button className="px-5 py-3 bg-[#FD8C00] rounded text-white">
