@@ -9,14 +9,14 @@ function App() {
   return (
     <div className="">
       <nav className="lg:block hidden">
-        <div className="flex w-screen   shadow-md py-3 px-3 justify-between items-center">
+        <div className="flex w-screen   shadow-md py-1 px-3 justify-between items-center">
           <div className="flex items-center" id="logo">
             <img src={logo} alt="logo" className="object-contain w-20" />
             <p className="text-[#FD8C00] text-[1.2rem] ">Evangelism Team</p>
           </div>
-          <p className="text-bold text-[#FD8C00] text-3xl">Attendance System</p>
+          <p className="text-bold text-[#FD8C00] text-2xl">Attendance System</p>
           <div className="flex justify-between ">
-            <button className="bg-[#FD8C00] p-3 rounded  text-white hover:bg-[#e27e03]">
+            <button className="bg-[#FD8C00] p-2 rounded  text-white hover:bg-[#e27e03]">
               Join the team
             </button>
           </div>
@@ -43,6 +43,9 @@ function App() {
         </button>
       </div>
       {/*   */}
+      {
+    
+      }
     </div>
   );
 }

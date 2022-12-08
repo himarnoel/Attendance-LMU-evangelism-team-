@@ -15,7 +15,7 @@ const Input = (props) => {
           id="email"
           name="id"
           className="bg-gray-50 border border-gray-300 border-solid   focus:outline-[#FD8C00]   text-sm rounded  block w-full p-2.5"
-          placeholder="yourname@email.com"
+          placeholder="reg no."
           required
         />
       </div>
