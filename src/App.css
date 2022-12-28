@@ -2,7 +2,7 @@ body {
   background-color: #f2f2f2;
 }
 
-select:required:invalid {
+select {
   color: gray !important;
 }
 option[value=""][disabled] {

@@ -90,8 +90,8 @@ const Register = () => {
         ""
       )}
       {/* Nav */}
-      <div className="  h-[190vh] lg:h-[160vh] md:h-screen flex flex-col md:justify-center   items-center md:pt-[3rem]  ">
-        <nav className="md:block hidden fixed w-full  top-0 bg-white ">
+      <div className="  h-[200vh]  sm:h-screen lg:h-[160vh] flex flex-col sm:justify-center   items-center md:pt-[3rem]  ">
+        <nav className="sm:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-1 px-5 justify-between items-center">
             <span className="flex items-center" id="logo">
               <img src={logo} alt="logo" className="object-contain w-14" />
@@ -103,14 +103,14 @@ const Register = () => {
 
         {/* Mobile Nav bar */}
 
-        <div className="md:hidden fixed top-0  bg-white w-screen">
+        <div className="sm:hidden fixed top-0  bg-white w-screen">
           <div className=" flex justify-between shadow-md items-center py-2 px-2">
             <img src={logo} alt="" className="object-contain w-10" />
             <p className="text-[#FD8C00] text-[0.8rem] ">Register to Join</p>
           </div>
         </div>
         <form
-          className="grid    md:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 h-[160vh] md:w-[90vw] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
+          className="grid    sm:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 sm:mt-0 h-[190vh] sm:w-[90vw]  sm:h-[80vh] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
@@ -197,7 +197,6 @@ const Register = () => {
               value={formik.values.level}
               onBlur={formik.handleBlur}
               placeholder="Select Level"
-              required
             >
               <option value="" disabled selected className=" ">
                 Select Level
@@ -282,7 +281,6 @@ const Register = () => {
               value={formik.values.gender}
               onBlur={formik.handleBlur}
               placeholder="Select Gender"
-              required
             >
               <option value="" disabled selected className=" ">
                 Select Gender
@@ -306,7 +304,6 @@ const Register = () => {
               value={formik.values.hall}
               onBlur={formik.handleBlur}
               placeholder=""
-              required
             >
               <option value="" disabled selected className="text-red-500">
                 Select Hall e.g Daniel
@@ -357,7 +354,6 @@ const Register = () => {
               value={formik.values.subunit}
               onBlur={formik.handleBlur}
               placeholder=""
-              required
             >
               <option value="" disabled selected className="text-red-500">
                 Select Subunit
@@ -374,7 +370,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="bg-[#FD8C00] md:col-span-2 md:w-[30rem]  p-5 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
+            className="bg-[#FD8C00] sm:col-span-2 sm:w-[30rem]  p-3 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
           >
             Join the team
           </button>
