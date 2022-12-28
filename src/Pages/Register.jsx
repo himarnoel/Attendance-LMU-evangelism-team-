@@ -114,11 +114,11 @@ const Register = () => {
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
-            <label className="block text-gray-700 text-xs  mb-2">
+            <label className="block text-gray-700 text-sm mb-2">
               Firstname
             </label>
             <input
-              className=" appearance-none border rounded w-full py-[0.24rem] px-3 text-gray-700 leading-tight  "
+              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
               id="firstname"
               type="text"
               placeholder="John"
