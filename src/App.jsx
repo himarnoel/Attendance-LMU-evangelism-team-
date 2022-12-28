@@ -5,6 +5,7 @@ import Cool from "./Components/Cool";
 import { Routes, Route } from "react-router-dom";
 import Att from "./Pages/Att";
 import Register from "./Pages/Register";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   return (
