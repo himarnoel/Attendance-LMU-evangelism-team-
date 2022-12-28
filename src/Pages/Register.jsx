@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.png";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { basicSchema } from "../schema";
 import { useFormik } from "formik";
 import { ToastContainer, toast } from "react-toastify";
@@ -93,10 +93,12 @@ const Register = () => {
       <div className="  h-[200vh]  sm:h-screen lg:h-[160vh] flex flex-col sm:justify-center   items-center md:pt-[3rem]  ">
         <nav className="sm:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-1 px-5 justify-between items-center">
-            <span className="flex items-center" id="logo">
-              <img src={logo} alt="logo" className="object-contain w-14" />
-              <p className="text-[#FD8C00] text-[1rem] ">Evangelism Team</p>
-            </span>
+            <Link to="/">
+              <span className="flex items-center" id="logo">
+                <img src={logo} alt="logo" className="object-contain w-14" />
+                <p className="text-[#FD8C00] text-[1rem] ">Evangelism Team</p>
+              </span>
+            </Link>
             <p className="text-bold text-[#FD8C00] text-lg">Join the team</p>
           </div>
         </nav>
@@ -104,13 +106,15 @@ const Register = () => {
         {/* Mobile Nav bar */}
 
         <div className="sm:hidden fixed top-0  bg-white w-screen">
-          <div className=" flex justify-between shadow-md items-center py-2 px-2">
-            <img src={logo} alt="" className="object-contain w-10" />
-            <p className="text-[#FD8C00] text-[0.8rem] ">Register to Join</p>
-          </div>
+          <Link to="/">
+            <div className=" flex justify-between shadow-md items-center py-2 px-2">
+              <img src={logo} alt="" className="object-contain w-10" />
+              <p className="text-[#FD8C00] text-[0.8rem] ">Register to Join</p>
+            </div>
+          </Link>
         </div>
         <form
-          className="grid    sm:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 sm:mt-0 h-[190vh] sm:w-[90vw]  sm:h-[80vh] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
+          className="grid    sm:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 sm:mt-0 h-[190vh] sm:w-[90vw]  sm:h-[0vh] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
@@ -118,7 +122,11 @@ const Register = () => {
               Firstname
             </label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.firstname && formik.touched.firstname
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="firstname"
               type="text"
               placeholder="John"
@@ -137,7 +145,11 @@ const Register = () => {
               Lastname
             </label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.lastname && formik.touched.lastname
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="lastname"
               type="text"
               placeholder="Doe"
@@ -154,7 +166,11 @@ const Register = () => {
           <div className="md:w-[20rem] w-[15rem]">
             <label className="block text-gray-700 text-sm  mb-2">RegNo</label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.regNo && formik.touched.regNo
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="regNo"
               type="text"
               placeholder="e.g 1900231"
@@ -173,7 +189,11 @@ const Register = () => {
               Matric No.
             </label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.matricNo && formik.touched.matricNo
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="matricNo"
               type="text"
               placeholder="e.g computer science"
@@ -192,7 +212,11 @@ const Register = () => {
             <select
               name="level"
               id="level"
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.level && formik.touched.level
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               onChange={formik.handleChange}
               value={formik.values.level}
               onBlur={formik.handleBlur}
@@ -218,7 +242,11 @@ const Register = () => {
               Department
             </label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.department && formik.touched.department
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="department"
               type="text"
               placeholder="e.g computer science"
@@ -237,7 +265,11 @@ const Register = () => {
           <div className="md:w-[20rem] w-[15rem]">
             <label className="block text-gray-700 text-sm  mb-2">Webmail</label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.webmail && formik.touched.webmail
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="webmail"
               type="email"
               placeholder="e.g doe.john@lmu.edu.ng"
@@ -257,7 +289,11 @@ const Register = () => {
               Phone No.(Whatsapp/Telegram)
             </label>
             <input
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.PhoneNo && formik.touched.PhoneNo
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="PhoneNo"
               type="tel"
               placeholder="e.g 08088223490"
@@ -276,7 +312,11 @@ const Register = () => {
             <select
               name="gender"
               id="gender"
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.gender && formik.touched.gender
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               onChange={formik.handleChange}
               value={formik.values.gender}
               onBlur={formik.handleBlur}
@@ -299,7 +339,11 @@ const Register = () => {
             <select
               name="hall"
               id="hall"
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              className={
+                formik.errors.hall && formik.touched.hall
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               onChange={formik.handleChange}
               value={formik.values.hall}
               onBlur={formik.handleBlur}
@@ -328,7 +372,11 @@ const Register = () => {
               Room Number
             </label>
             <input
-              class=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.roomNo && formik.touched.roomNo
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               id="roomNo"
               type="text"
               placeholder="e.g C308"
@@ -349,7 +397,11 @@ const Register = () => {
             <select
               name="subunit"
               id="subunit"
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className={
+                formik.errors.subunit && formik.touched.subunit
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
               onChange={formik.handleChange}
               value={formik.values.subunit}
               onBlur={formik.handleBlur}
