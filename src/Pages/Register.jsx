@@ -63,6 +63,7 @@ const Register = () => {
     },
     validationSchema: basicSchema,
     onSubmit: async (values) => {
+      window.scrollTo(0, 0);
       Join(values);
     },
   });
@@ -71,7 +72,7 @@ const Register = () => {
     <div>
       <ToastContainer />
       {load ? (
-        <div className="w-screen md:h-screen h-[190vh]  bg-white/60 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
+        <div className="w-screen  h-screen  bg-white/60 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
           <Oval
             height={90}
             width={90}
