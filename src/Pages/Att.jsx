@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.png";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { link } from "./../schema/index";
@@ -11,7 +11,7 @@ const Att = () => {
   const [regNo, setregNo] = useState("");
   const [load, setload] = useState(false);
   const Attend = () => {
-  
+    window.scrollTo(0, 0);
     setload(true);
     axios
       .post(`${link}/enter`, {
@@ -66,12 +66,10 @@ const Att = () => {
       <div className="  h-screen flex justify-center items-center ">
         <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-2 px-3 justify-between items-center">
-          <Link to="/">
-              <span className="flex items-center" id="logo">
-                <img src={logo} alt="logo" className="object-contain w-14" />
-                <p className="text-[#FD8C00] text-[1rem] ">Evangelism Team</p>
-              </span>
-            </Link>
+            <span className="flex items-center" id="logo">
+              <img src={logo} alt="logo" className="object-contain w-14" />
+              <p className="text-[#FD8C00] text-[1.2rem] ">Evangelism Team</p>
+            </span>
             <p className="text-bold text-[#FD8C00] text-2xl">
               Attendance System
             </p>
@@ -89,12 +87,16 @@ const Att = () => {
         {/* Mobile Nav bar */}
 
         <div className="lg:hidden fixed top-0 bg-white w-full">
-        <Link to="/">
-            <div className=" flex justify-between shadow-md items-center py-2 px-2">
-              <img src={logo} alt="" className="object-contain w-10" />
-              <p className="text-[#FD8C00] text-[0.8rem] ">Register to Join</p>
-            </div>
-          </Link>
+          <div className=" flex justify-between shadow-md items-center py-3">
+            <img src={logo} alt="" className="object-contain w-16" />
+            <p className="text-[#FD8C00] text-[1rem] ">Attendance System</p>
+            <button
+              onClick={() => navi("/join")}
+              className="py-[0.5rem] px-[0.4rem] text-xs bg-[#FD8C00] rounded-md text-white mr-2"
+            >
+              Join the team
+            </button>
+          </div>
         </div>
 
         <div className="  flex flex-col items-center justify-evenly  mx-auto  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[20rem] xl:w-[25rem]   bg-white shadow-lg rounded-lg ">
