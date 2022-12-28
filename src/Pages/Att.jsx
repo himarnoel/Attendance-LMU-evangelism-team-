@@ -11,6 +11,7 @@ const Att = () => {
   const [regNo, setregNo] = useState("");
   const [load, setload] = useState(false);
   const Attend = () => {
+  
     setload(true);
     axios
       .post(`${link}/enter`, {

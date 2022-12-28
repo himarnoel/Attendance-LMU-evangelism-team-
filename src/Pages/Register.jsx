@@ -53,7 +53,7 @@ const Register = () => {
       regNo: "",
       matricNo: "",
       gender: "",
-      level: 100,
+      level: "",
       roomNo: "",
       hall: "",
       department: "",
@@ -90,7 +90,7 @@ const Register = () => {
         ""
       )}
       {/* Nav */}
-      <div className="  h-[190vh] md:h-screen flex flex-col md:justify-center   items-center md:pt-[3rem]  ">
+      <div className="  h-[190vh] lg:h-[160vh] md:h-screen flex flex-col md:justify-center   items-center md:pt-[3rem]  ">
         <nav className="md:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-1 px-5 justify-between items-center">
             <span className="flex items-center" id="logo">
@@ -110,7 +110,7 @@ const Register = () => {
           </div>
         </div>
         <form
-          className="grid    md:grid-cols-2 items-center place-items-center bg-white w-[20rem]   mt-20 h-[160vh] md:w-[90vw] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[90vh] xl:w-[60vw] lg:w-[70vw] rounded-md shadow-md "
+          className="grid    md:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 h-[160vh] md:w-[90vw] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
@@ -125,7 +125,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.firstname}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.firstname && formik.touched.firstname ? (
               <p className="text-red-500 text-sm ">{formik.errors.firstname}</p>
@@ -145,7 +144,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.lastname}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.lastname && formik.touched.lastname ? (
               <p className="text-red-500 text-sm ">{formik.errors.lastname}</p>
@@ -163,7 +161,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.regNo}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.regNo && formik.touched.regNo ? (
               <p className="text-red-500 text-sm ">{formik.errors.regNo}</p>
@@ -183,7 +180,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.matricNo}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.matricNo && formik.touched.matricNo ? (
               <p className="text-red-500 text-sm ">{formik.errors.matricNo}</p>
@@ -200,7 +196,12 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.level}
               onBlur={formik.handleBlur}
+              placeholder="Select Level"
+              required
             >
+              <option value="" disabled selected className=" ">
+                Select Level
+              </option>
               <option value="100">100</option>
               <option value="200">200</option>
               <option value="300">300</option>
@@ -225,7 +226,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.department}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.department && formik.touched.department ? (
               <p className="text-red-500 text-sm ">
@@ -245,7 +245,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.webmail}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.webmail && formik.touched.webmail ? (
               <p className="text-red-500 text-sm ">{formik.errors.webmail}</p>
@@ -282,7 +281,12 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.gender}
               onBlur={formik.handleBlur}
+              placeholder="Select Gender"
+              required
             >
+              <option value="" disabled selected className=" ">
+                Select Gender
+              </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -297,11 +301,16 @@ const Register = () => {
             <select
               name="hall"
               id="hall"
-              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+              className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
               onChange={formik.handleChange}
               value={formik.values.hall}
               onBlur={formik.handleBlur}
+              placeholder=""
+              required
             >
+              <option value="" disabled selected className="text-red-500">
+                Select Hall e.g Daniel
+              </option>
               <option value="Daniel">Daniel</option>
               <option value="Dorcas">Dorcas</option>
               <option value="Isaac">Isaac</option>
@@ -329,7 +338,6 @@ const Register = () => {
               onChange={formik.handleChange}
               value={formik.values.roomNo}
               onBlur={formik.handleBlur}
-              required
             />
             {formik.errors.roomNo && formik.touched.roomNo ? (
               <p className="text-red-500 text-sm ">{formik.errors.roomNo}</p>
@@ -346,9 +354,14 @@ const Register = () => {
               id="subunit"
               className=" appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
               onChange={formik.handleChange}
-              value={formik.values.Subunit}
+              value={formik.values.subunit}
               onBlur={formik.handleBlur}
+              placeholder=""
+              required
             >
+              <option value="" disabled selected className="text-red-500">
+                Select Subunit
+              </option>
               <option value="follow-up">Follow-up Team</option>
               <option value="media">Media Team</option>
               <option value="welfare">Welfare Team</option>
@@ -361,7 +374,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="bg-[#FD8C00] md:col-span-2 md:w-[30rem]  p-2 lg:p-1  rounded  text-white hover:bg-[#fda335]"
+            className="bg-[#FD8C00] md:col-span-2 md:w-[30rem]  p-5 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
           >
             Join the team
           </button>
