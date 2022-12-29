@@ -1,5 +1,6 @@
 body {
   background-color: #f2f2f2;
+  overflow-x: hidden ;
 }
 
 select {
@@ -11,6 +12,7 @@ option[value=""][disabled] {
 option {
   color: black;
 }
+
 /* table, th, td,tbody, thead{
   border: 1px solid black;
 } */
