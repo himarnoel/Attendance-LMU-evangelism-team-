@@ -11,3 +11,7 @@ option[value=""][disabled] {
 option {
   color: black;
 }
+/* table, th, td,tbody, thead{
+  border: 1px solid black;
+} */
+

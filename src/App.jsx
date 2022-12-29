@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import Att from "./Pages/Att";
 import Register from "./Pages/Register";
 import "react-toastify/dist/ReactToastify.min.css";
+import Admin from "./Pages/Admin";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route element={<Att />} path="/" />
         <Route element={<Register />} path="/join" />
+        <Route element={<Admin />} path="/admin" />
       </Routes>
     </>
   );
