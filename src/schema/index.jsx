@@ -70,4 +70,8 @@ export const basicSchema = yup.object().shape({
     .string()
 
     .required("Please fill up this field"),
+    dob: yup
+    .string()
+
+    .required("Please fill up this field"),
 });

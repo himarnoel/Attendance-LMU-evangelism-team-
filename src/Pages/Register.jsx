@@ -12,6 +12,11 @@ import axios from "axios";
 const Register = () => {
   const [load, setload] = useState(false);
   const Join = (values) => {
+    let today = new Date(values.dob);
+    let month = today.toLocaleString("default", { month: "long" }).toString();
+    let day = ("0" + today.getDate()).slice(-2).toString();
+    let year = today.getFullYear().toString();
+    console.log(`${month}  ${day} ${year}`);
     setload(true);
     axios
       .post(`${link}/createUser`, {
@@ -27,6 +32,7 @@ const Register = () => {
         webmail: values.webmail,
         Subunit: values.subunit,
         phoneNo: values.PhoneNo,
+        dob: `${day} ${month}  ${year}`,
       })
       .then((res) => {
         if (res.status == 200) {
@@ -37,13 +43,20 @@ const Register = () => {
           toast.error(e.response.data);
           console.log(e.response);
         }
-        formik.resetForm();
+        // formik.resetForm();
       })
       .catch((e) => {
         setload(false);
-        toast.error(e.response.data);
-        console.log(e.response);
-        formik.resetForm();
+        if (e.response.status == 400) {
+          toast.warning("You've registered earlier");
+          // formik.resetForm();
+        } else {
+          toast.error("Network Error");
+          // formik.resetForm();
+        }
+     
+
+        
       });
   };
   const formik = useFormik({
@@ -60,6 +73,7 @@ const Register = () => {
       webmail: "",
       subunit: "",
       PhoneNo: "",
+      dob: "",
     },
     validationSchema: basicSchema,
     onSubmit: async (values) => {
@@ -67,10 +81,11 @@ const Register = () => {
       Join(values);
     },
   });
+  // console.log(formik.values);
 
   return (
     <div>
-      <ToastContainer />
+      <ToastContainer autoClose={1200}/>
       {load ? (
         <div className="w-screen  h-screen  bg-white/60 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
           <Oval
@@ -90,7 +105,7 @@ const Register = () => {
         ""
       )}
       {/* Nav */}
-      <div className="  h-[200vh]  sm:h-screen lg:h-[160vh] flex flex-col sm:justify-center   items-center md:pt-[3rem]  ">
+      <div className=" flex flex-col sm:justify-center   items-center sm:pt-[2rem] md:pt-[3rem]  lg:pt-[4rem] ">
         <nav className="sm:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-1 px-5 justify-between items-center">
             <Link to="/">
@@ -114,7 +129,7 @@ const Register = () => {
           </Link>
         </div>
         <form
-          className="grid    sm:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 sm:mt-0 h-[190vh] sm:w-[90vw]  sm:h-[0vh] md:h-[80vh] md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
+          className="grid    sm:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 sm:mb-10 h-[190vh] sm:w-[90vw]  sm:h-[120vh] md:h-[96vh] md:mb-36 md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
@@ -420,9 +435,32 @@ const Register = () => {
               ""
             )}
           </div>
+          <div className="md:w-[20rem]  w-[15rem] sm:col-span-2">
+            <label className="block text-gray-700 text-sm  mb-2">
+              Date of Birth
+            </label>
+            <input
+              className={
+                formik.errors.dob && formik.touched.dob
+                  ? "border-red-500 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  "
+                  : "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
+              }
+              id="dob"
+              type="date"
+              placeholder="e.g C308"
+              onChange={formik.handleChange}
+              value={formik.values.dob}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.dob && formik.touched.dob ? (
+              <p className="text-red-500 text-sm ">{formik.errors.dob}</p>
+            ) : (
+              ""
+            )}
+          </div>
           <button
             type="submit"
-            className="bg-[#FD8C00] sm:col-span-2 sm:w-[30rem]  p-3 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
+            className="bg-[#FD8C00] sm:col-span-2 sm:w-[30rem]  p-3 md:p-2 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
           >
             Join the team
           </button>
