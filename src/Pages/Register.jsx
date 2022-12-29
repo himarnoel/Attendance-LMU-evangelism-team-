@@ -43,18 +43,19 @@ const Register = () => {
           toast.error(e.response.data);
           console.log(e.response);
         }
-        // formik.resetForm();
+        formik.resetForm();
       })
       .catch((e) => {
         setload(false);
         if (e.response.status == 400) {
           toast.warning("You've registered earlier");
-          // formik.resetForm();
+         
         } else {
           toast.error("Network Error");
-          // formik.resetForm();
+          
+        
         }
-     
+        formik.resetForm();
 
         
       });
