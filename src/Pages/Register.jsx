@@ -129,7 +129,7 @@ const Register = () => {
           </Link>
         </div>
         <form
-          className="grid    sm:grid-cols-2 items-center place-items-center bg-white overflow-auto py-20 gap-y-12   w-[20rem]   mt-20 mb-8 sm:mb-10 h-[190vh] sm:w-[90vw]  sm:h-[120vh] md:h-[96vh] md:mb-36 md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
+          className="grid    sm:grid-cols-2 items-center place-items-center bg-white overflow-auto py-20 gap-y-12 md:gap-y-4  w-[20rem]   mt-20 mb-8 sm:mb-10 h-[190vh] sm:w-[90vw]  sm:h-[120vh] md:h-[96vh] md:mb-36 md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
@@ -460,7 +460,7 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="bg-[#FD8C00] mt-5 md:mt-0 sm:col-span-2 sm:w-[30rem]  p-3 md:p-2 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
+            className="bg-[#FD8C00]  mb-5  md:mt-0 sm:col-span-2 sm:w-[30rem]  p-3 md:p-2 lg:p-[0.79rem]  rounded  text-white hover:bg-[#fda335]"
           >
             Join the team
           </button>
