@@ -129,7 +129,7 @@ const Register = () => {
           </Link>
         </div>
         <form
-          className="grid    sm:grid-cols-2 items-center place-items-center bg-white  w-[20rem]   mt-20 sm:mb-10 h-[190vh] sm:w-[90vw]  sm:h-[120vh] md:h-[96vh] md:mb-36 md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
+          className="grid    sm:grid-cols-2 items-center place-items-center bg-white overflow-auto  w-[20rem]   mt-20 sm:mb-10 h-[190vh] sm:w-[90vw]  sm:h-[120vh] md:h-[96vh] md:mb-36 md:mt-4 lg:mt-0 lg:h-[140vh] xl:w-[60vw] lg:w-[70vw] rounded-md "
           onSubmit={formik.handleSubmit}
         >
           <div className="md:w-[20rem] w-[15rem]">
