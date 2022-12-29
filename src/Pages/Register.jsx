@@ -49,15 +49,10 @@ const Register = () => {
         setload(false);
         if (e.response.status == 400) {
           toast.warning("You've registered earlier");
-         
         } else {
           toast.error("Network Error");
-          
-        
         }
         formik.resetForm();
-
-        
       });
   };
   const formik = useFormik({
@@ -74,7 +69,7 @@ const Register = () => {
       webmail: "",
       subunit: "",
       PhoneNo: "",
-      dob: "",
+      dob: "12/12/2022",
     },
     validationSchema: basicSchema,
     onSubmit: async (values) => {
@@ -86,7 +81,7 @@ const Register = () => {
 
   return (
     <div>
-      <ToastContainer autoClose={1200}/>
+      <ToastContainer autoClose={1200} />
       {load ? (
         <div className="w-screen  h-screen  bg-white/60 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
           <Oval
@@ -108,14 +103,16 @@ const Register = () => {
       {/* Nav */}
       <div className=" flex flex-col sm:justify-center   items-center sm:pt-[2rem] md:pt-[3rem]  lg:pt-[4rem] ">
         <nav className="sm:block hidden fixed w-full  top-0 bg-white ">
-          <div className="flex w-screen   shadow py-1 px-5 justify-between items-center">
+          <div className="flex w-screen   shadow py-1 px-5  items-center">
             <Link to="/">
               <span className="flex items-center" id="logo">
                 <img src={logo} alt="logo" className="object-contain w-14" />
                 <p className="text-[#FD8C00] text-[1rem] ">Evangelism Team</p>
               </span>
             </Link>
-            <p className="text-bold text-[#FD8C00] text-lg">Join the team</p>
+            <p className="text-bold text-[#FD8C00] text-3xl mx-auto">
+              Join the team
+            </p>
           </div>
         </nav>
 
@@ -123,9 +120,11 @@ const Register = () => {
 
         <div className="sm:hidden fixed top-0  bg-white w-screen">
           <Link to="/">
-            <div className=" flex justify-between shadow-md items-center py-2 px-2">
+            <div className=" flex  shadow-md items-center py-2 px-2">
               <img src={logo} alt="" className="object-contain w-10" />
-              <p className="text-[#FD8C00] text-[0.8rem] ">Register to Join</p>
+              <p className="text-[#FD8C00] text-[0.8rem]  mx-auto">
+                Register to Join
+              </p>
             </div>
           </Link>
         </div>
@@ -448,7 +447,7 @@ const Register = () => {
               }
               id="dob"
               type="date"
-              placeholder="e.g C308"
+              placeholder="12/12/2022"
               onChange={formik.handleChange}
               value={formik.values.dob}
               onBlur={formik.handleBlur}
