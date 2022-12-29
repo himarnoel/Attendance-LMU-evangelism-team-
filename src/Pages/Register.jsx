@@ -110,7 +110,7 @@ const Register = () => {
                 <p className="text-[#FD8C00] text-[1rem] ">Evangelism Team</p>
               </span>
             </Link>
-            <p className="text-bold text-[#FD8C00] text-3xl mx-auto">
+            <p className="text-bold text-[#FD8C00] text-2xl mx-auto">
               Join the team
             </p>
           </div>
@@ -122,7 +122,7 @@ const Register = () => {
           <Link to="/">
             <div className=" flex  shadow-md items-center py-2 px-2">
               <img src={logo} alt="" className="object-contain w-10" />
-              <p className="text-[#FD8C00] text-[0.8rem]  mx-auto">
+              <p className="text-[#FD8C00] text-[1rem]  mx-auto">
                 Register to Join
               </p>
             </div>
