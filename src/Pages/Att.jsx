@@ -7,12 +7,12 @@ import axios from "axios";
 import { link } from "./../schema/index";
 import { ToastContainer, toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
+import { useFormik } from "formik";
 const Att = () => {
   const [regNo, setregNo] = useState("");
   const [load, setload] = useState(false);
   const Attend = () => {
-    window.scrollTo(0, 0);
-    setload(true);
+    
     axios
       .post(`${link}/enter`, {
         regNo: regNo.toString(),
@@ -36,6 +36,40 @@ const Att = () => {
         }
       });
   };
+  
+  const formik = useFormik({
+    initialValues: {
+      regNo: "",
+      serviceType: "",
+    },
+    validationSchema: basicSchema,
+    onSubmit: (values) => {
+      const token = localStorage.getItem("token");
+      window.scrollTo(0, 0);
+      setload(true);
+      axios
+        .post(`https://attendance-system.up.railway.app/attendance/enter`, values, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          setload(false);
+          toast.success("Login successful");
+        })
+        .catch((e) => {
+          if (e.code.toString() == "ERR_NETWORK") {
+            toast.error(e.message.toString(), { position: "bottom-center" });
+            setload(false);
+          }
+
+          if (e.response.status >= 400) {
+            toast.error("Invalid username or pasword");
+            setload(false);
+          }
+
+          setload(false);
+        });
+    },
+  });
   const navi = useNavigate();
   const Logout = () => {
     localStorage.removeItem("token");
@@ -102,7 +136,7 @@ const Att = () => {
           </div>
         </div>
 
-        <div className="  flex flex-col items-center justify-evenly  mx-auto  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[20rem] xl:w-[25rem]   bg-white shadow-lg rounded-lg ">
+        <form  className="  flex flex-col items-center justify-evenly  mx-auto  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[20rem] xl:w-[25rem]   bg-white shadow-lg rounded-lg ">
           <div className="h-full flex justify-evenly items-center flex-col  w-[17rem]">
             <div className="text-xl ">Enter your Attendance</div>
             <div>
@@ -140,7 +174,7 @@ const Att = () => {
                 placeholder=""
               >
                 <option value="" disabled selected className="text-red-500">
-                  Select Service Type 
+                  Select Service Type
                 </option>
                 <option value="Tuesday Preservice">Tuesday Preservice</option>
                 <option value="Thursday Preservice">Thursday Preservice</option>
@@ -158,7 +192,7 @@ const Att = () => {
               Click here
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
