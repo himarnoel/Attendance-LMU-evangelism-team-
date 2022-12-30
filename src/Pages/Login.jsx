@@ -1,75 +1,139 @@
 import React from "react";
 import { useState } from "react";
 import logo from "../assets/logo.png";
+import { useFormik } from "formik";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { basic } from "../schema";
 const Login = () => {
+  const navigate = useNavigate();
+  const [load, setload] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: basic,
+    onSubmit: (values) => {
+      setload(true);
+      axios
+        .post("https://attendance-system.up.railway.app/admin/login", values)
+        .then((res) => {
+          localStorage.setItem("token", res.data.tokens);
+          console.log("loged in ");
+          setload(false);
+          toast.success("Login successful");
+          window.location.reload();
+        })
+        .catch((e) => {
+          if (e.code.toString() == "ERR_NETWORK") {
+            toast.error(e.message.toString(), { position: "bottom-center" });
+            setload(false);
+          }
+
+          if (e.response.status >= 400) {
+            toast.error("Invalid username or pasword");
+            setload(false);
+          }
+
+          setload(false);
+        });
+    },
+  });
   return (
-    <div className="w-screen h-screen flex  flex-col justify-center items-center">
-      <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
-        <div className="flex w-screen   shadow py-2 px-3  items-center">
-          <span className="flex items-center" id="logo">
-            <img src={logo} alt="logo" className="object-contain w-14" />
-            <p className="text-[#FD8C00] text-[1.2rem] ">Evangelism Team</p>
-          </span>
-          <p className="text-bold text-[#FD8C00] text-2xl mx-auto">
-            Admin Login{" "}
-          </p>
-        </div>
-      </nav>
+    <>
+      <ToastContainer autoClose={1200} />
+      <div className="w-screen h-screen flex  flex-col justify-center items-center">
+        <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
+          <div className="flex w-screen   shadow py-2 px-3  items-center">
+            <span className="flex items-center" id="logo">
+              <img src={logo} alt="logo" className="object-contain w-14" />
+              <p className="text-[#FD8C00] text-[1.2rem] ">Evangelism Team</p>
+            </span>
+            <p className="text-bold text-[#FD8C00] text-2xl mx-auto">
+              Admin Login{" "}
+            </p>
+          </div>
+        </nav>
 
-      {/* Mobile Nav bar */}
+        {/* Mobile Nav bar */}
 
-      <div className="lg:hidden fixed top-0 bg-white w-full">
-        <div className=" flex  shadow-md items-center py-3">
-          <img src={logo} alt="" className="object-contain w-16" />
-          <p className="text-[#FD8C00] text-[1.5rem] mx-auto">Admin Login</p>
-         
-        </div>
-      </div>
-
-      <div className="flex justify-evenly items-center flex-col  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[20rem] xl:w-[25rem]   bg-white shadow-lg rounded-lg">
-        <div>
-          <div className="w-[17rem]">
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
-            >
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              pattern="[0-9]{7}"
-              className="bg-gray-50 border border-gray-300 border-solid w-[17rem]  focus:outline-[#FD8C00]   text-sm rounded   p-2.5"
-              placeholder="e.g john.doe"
-              required
-            />
+        <div className="lg:hidden fixed top-0 bg-white w-full">
+          <div className=" flex  shadow-md items-center py-3">
+            <img src={logo} alt="" className="object-contain w-16" />
+            <p className="text-[#FD8C00] text-[1.5rem] mx-auto">Admin Login</p>
           </div>
         </div>
-        <div>
-          <div className="w-[17rem]">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
-            >
-             Password
-            </label>
-            <input
-              type="text"
-              id="password"
-              name="id"
-              pattern="[0-9]{7}"
-              className="bg-gray-50 border border-gray-300 border-solid w-[17rem]  focus:outline-[#FD8C00]   text-sm rounded   p-2.5"
-              placeholder="password"
-              required
-            />
+
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex justify-evenly items-center flex-col  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[20rem] xl:w-[25rem]   bg-white shadow-lg rounded-lg"
+        >
+          <div>
+            <div className="w-[17rem]">
+              <label
+                htmlFor="email"
+                className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                className="bg-gray-50 border border-gray-300 border-solid w-[17rem]  focus:outline-[#FD8C00]   text-sm rounded   p-2.5"
+                placeholder="e.g john.doe"
+                onChange={formik.handleChange}
+                value={formik.values.username}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.username && formik.touched.username ? (
+                <p className="text-red-500 text-sm ">
+                  {formik.errors.username}
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-        </div>
-        <button className="w-[17rem] py-2 bg-[#FD8C00] rounded text-white  hover:bg-[#fda335]">
-          Click here
-        </button>
+          <div>
+            <div className="w-[17rem]">
+              <label
+                htmlFor="password"
+                className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                className="bg-gray-50 border border-gray-300 border-solid w-[17rem]  focus:outline-[#FD8C00]   text-sm rounded   p-2.5"
+                placeholder="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                onBlur={formik.handleBlur}
+              />
+              {formik.errors.password && formik.touched.password ? (
+                <p className="text-red-500 text-sm ">
+                  {formik.errors.password}
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="w-[17rem] py-2 bg-[#FD8C00] rounded text-white  hover:bg-[#fda335]"
+          >
+            Click here
+          </button>
+        </form>
       </div>
-    </div>
+    </>
   );
 };
 

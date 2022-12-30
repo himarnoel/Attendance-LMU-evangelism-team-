@@ -37,13 +37,16 @@ const Att = () => {
       });
   };
   const navi = useNavigate();
+  const Logout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
   return (
     <div>
       <ToastContainer
         pauseOnHover={false}
         autoClose={1000}
         hideProgressBar={false}
-   
       />
       {load ? (
         <div className="w-screen h-screen   bg-white/60 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
@@ -75,10 +78,10 @@ const Att = () => {
             </p>
             <div className="flex justify-between ">
               <button
-                onClick={() => navi("/join")}
+                onClick={() => Logout()}
                 className="bg-[#FD8C00] p-2 rounded  text-white hover:bg-[#fda335]"
               >
-                Join the team
+                Logout
               </button>
             </div>
           </div>
@@ -124,6 +127,29 @@ const Att = () => {
                   required
                 />
               </div>
+            </div>
+            <div className="w-[17rem]">
+              {" "}
+              <select
+                name="hall"
+                id="hall"
+                className="appearance-none border rounded w-full py-2 px-3 text-black leading-tight "
+                // onChange={formik.handleChange}
+                // value={formik.values.hall}
+                // onBlur={formik.handleBlur}
+                placeholder=""
+              >
+                <option value="" disabled selected className="text-red-500">
+                  Select Service Type 
+                </option>
+                <option value="Tuesday Preservice">Tuesday Preservice</option>
+                <option value="Thursday Preservice">Thursday Preservice</option>
+                <option value="Thursday Prayer Meeting">
+                  Thursday Prayer Meeting
+                </option>
+                <option value="Saturday Meeting">Saturday Meeting</option>
+                <option value="Sunday Preservice">Sunday Preservice</option>
+              </select>
             </div>
             <button
               onClick={() => Attend()}

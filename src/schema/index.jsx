@@ -75,3 +75,20 @@ export const basicSchema = yup.object().shape({
 
     .required("Please fill up this field"),
 });
+
+
+//  login
+
+export const basic = yup.object().shape({
+  username: yup.string().required("Please fill up this field"),
+  password: yup.string().required("Please fill up this field"),
+});
+
+
+
+
+//attendace
+export const atten = yup.object().shape({
+ regNo: yup.string().required("Please fill up this field"),
+ ServiceType: yup.string().required("Please fill up this field"),
+});
