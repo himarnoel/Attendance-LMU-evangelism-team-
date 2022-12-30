@@ -21,7 +21,7 @@ const Login = () => {
       axios
         .post("https://attendance-system.up.railway.app/admin/login", values)
         .then((res) => {
-          localStorage.setItem("token", res.data.tokens);
+          localStorage.setItem("token", res.data.token);
           console.log("loged in ");
           setload(false);
           toast.success("Login successful");
@@ -44,7 +44,25 @@ const Login = () => {
   });
   return (
     <>
-      <ToastContainer autoClose={1200} />
+     <ToastContainer autoClose={1200} />
+      {load ? (
+        <div className="w-screen  h-screen  bg-white/60 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
+          <Oval
+            height={90}
+            width={90}
+            color="#FD8C00"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#FD8C00"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <div className="w-screen h-screen flex  flex-col justify-center items-center">
         <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-2 px-3  items-center">
