@@ -17,7 +17,7 @@ function App() {
       <Routes>
       <Route element={<Home />} path="/" />
         <Route element={<Register />} path="/join" />
-        <Route element=  {token ? <Navigate to="/att" /> : <Login />}path="/login" />
+        <Route element=  {token ? <Navigate to="/admin" /> : <Login />} path="/login" />
         <Route
           path="/att"
           element={token ? <Att /> : <Navigate to="/login" />}

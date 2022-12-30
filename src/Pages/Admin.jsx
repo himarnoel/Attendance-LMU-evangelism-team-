@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { link } from "./../schema/index";
 const Admin = () => {
   const navi = useNavigate();
+  const [member, setmember] = useState([]);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    const token = localStorage.getItem("token");
+    axios
+      .get(`${link}`, {
+        headers: { authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        setmember(res.data);
+      })
+      .catch(() => {});
+  };
   return (
     <div className="">
       <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
@@ -60,6 +78,9 @@ const Admin = () => {
               <thead>
                 <tr>
                   <th className="px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
+                    S/N
+                  </th>
+                  <th className="px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
                     FirstName
                   </th>
                   <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
@@ -98,89 +119,59 @@ const Admin = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="bg-white lg:hover:bg-gray-100  mb-10 lg:mb-0">
-                 
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2 flex text-gray-800 text-center border border-b text-center ">
-                    <button className="p-2 bg-yellow-500 rounded  ">
-                      Edit
-                    </button>
-                    <button className="p-2 bg-red-500 rounded text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-                <tr className="bg-white lg:hover:bg-gray-100  mb-10 lg:mb-0">
-                 
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>{" "}
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
-                    sdfssf
-                  </td>
-                  <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2 flex text-gray-800 text-center border border-b text-center ">
-                    <button className="p-2 bg-yellow-500 rounded  ">
-                      Edit
-                    </button>
-                    <button className="p-2 bg-red-500 rounded text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              
+                {member.map((arr, i) => (
+                  <tr
+                    key={i}
+                    className="bg-white lg:hover:bg-gray-100  mb-10 lg:mb-0"
+                  >
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {i + 1}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.firstname}
+                    </td>
+
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.lastname}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.regNo}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.matricNo}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.Gender}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.level}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.hall}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.roomNO}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.department}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.webmail.split("@lmu.edu.ng")}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.Subunit}
+                    </td>
+
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2 flex text-gray-800 text-center border border-b text-center ">
+                      <button className="p-2 bg-yellow-500 rounded  ">
+                        Edit
+                      </button>
+                      <button className="p-2 bg-red-500 rounded text-white">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
