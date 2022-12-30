@@ -92,3 +92,14 @@ export const atten = yup.object().shape({
  regNo: yup.string().required("Please fill up this field"),
  serviceType: yup.string().required("Please fill up this field"),
 });
+
+
+//Dowload att
+
+export const download = yup.object().shape({
+  date: yup
+  .string()
+  .required("Please fill up this field"),
+  serviceType: yup.string().required("Please fill up this field"),
+ });
+ 

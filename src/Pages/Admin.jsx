@@ -2,27 +2,76 @@ import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { link } from "./../schema/index";
+import { download, link } from "./../schema/index";
+import { ToastContainer } from "react-toastify";
+import { Oval, ThreeDots } from "react-loader-spinner";
+import { useFormik } from "formik";
 const Admin = () => {
   const navi = useNavigate();
   const [member, setmember] = useState([]);
+  const [load, setload] = useState(false);
+
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
     const token = localStorage.getItem("token");
+    setload(true);
     axios
       .get(`${link}`, {
         headers: { authorization: `Bearer ${token}` },
       })
       .then((res) => {
         setmember(res.data);
+        setload(false);
       })
-      .catch(() => {});
+      .catch((e) => {
+        setload(false);
+      });
+  };
+  const getMedia = (val) => {
+    return member.filter((arr) => arr.Subunit === val).length;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      date: "",
+      serviceType: "",
+    },
+    validationSchema: download,
+    onsubmit: (values) => {
+      Download(values);
+    },
+  });
+  console.log(formik.values);
+  const Download = (values) => {
+    let today = new Date(values.date);
+    let month = today.toLocaleString("default", { month: "long" }).toString();
+    let day = ("0" + today.getDate()).slice(-2).toString();
+    let year = today.getFullYear().toString();
+    axios.get(`${link}/getallattendance?month=${month}&year=${year}&date=&${day}&serviceType=${values.serviceType}`);
   };
   return (
     <div className="">
+      <ToastContainer autoClose={1200} />
+      {load ? (
+        <div className="w-screen  h-screen  bg-white/90 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
+          <ThreeDots
+            height="100"
+            width="100"
+            radius="9"
+            color="#FD8C00"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
         <div className="flex w-screen   shadow py-2 px-5 justify-between items-center">
           <span className="flex items-center" id="logo">
@@ -54,18 +103,28 @@ const Admin = () => {
 
       <div className="pt-10 lg:px-10 md:px-10 px-2">
         <div className="grid place-items-center lg:grid-cols-3 gap-3 lg:gap-5 mt-10 ">
-          <div className="bg-red-500/60 text-white h-[28vh] md:h-[15vh]  lg:h-[30vh] flex flex-col justify-center items-center w-[90vw]   md:w-full rounded-lg">
-            <p className="text-xl "> Total number of members</p>
-            <p className="text-4xl mt-3"> 64</p>
+          <div className="bg-red-500/60 text-white h-[40vh] md:h-[40vh]  lg:h-[30vh] xl:h-[34vh] flex flex-col justify-center items-center w-[90vw]   md:w-full rounded-lg">
+            <p className="text-xl text-center"> Total number of members</p>
+            <p className="text-4xl mt-3"> {member.length}</p>
           </div>{" "}
-          <div className="bg-orange-500/60 text-white h-[28vh] md:h-[15vh]  lg:h-[30vh]  flex flex-col justify-center gap-[0.6rem] items-center  w-[90vw] md:w-full rounded-lg">
-            <p className="text-2xl "> Last Attendance</p>
-            <p className="text-lg">40 male</p>
-            <p className="text-lg">20 female</p>
-            <p className="text-3xl ">Total 60</p>
+          <div className="bg-orange-500/60 text-white h-[40vh] md:h-[40vh]  lg:h-[30vh] xl:h-[34vh]  flex flex-col  justify-evenly text gap-[0.6rem] items-center  w-[90vw] md:w-full rounded-lg">
+            <p className="text-xl ">Subunit</p>
+            <p className="text-base">
+              <span className="mr-2"> {getMedia("media")}</span>
+              Media
+            </p>
+            <p className="text-base">
+              <span className="mr-2"> {getMedia("follow-up")}</span>
+              Follow-up
+            </p>
+            <p className="text-base">
+              <span className="mr-2"> {getMedia("welfare")}</span>
+              Welfare
+            </p>
+            <p className="text-xl ">Total {member.length}</p>
           </div>{" "}
-          <div className="bg-green-500/60 text-white h-[28vh] md:h-[15vh]  lg:h-[30vh] flex flex-col justify-center items-center  w-[90vw] md:w-full rounded-lg">
-            <p className="text-xl "> Total number of members</p>
+          <div className="bg-green-500/60 text-white h-[40vh] md:h-[40vh]  lg:h-[30vh] xl:h-[34vh] flex flex-col justify-center items-center  w-[90vw] md:w-full rounded-lg">
+            <p className="text-xl "> New Converts</p>
             <p className="text-4xl mt-3"> 64</p>
           </div>{" "}
         </div>
@@ -75,45 +134,48 @@ const Admin = () => {
 
           <div className="lg:w-[36rem] xl:w-[48rem] w-[90vw] md:w-full max-h-60 mt-10 overflow-auto lg:text-lg rounded-md bg-white">
             <table className=" w-full">
-              <thead>
+              <thead className=" sticky top-0">
                 <tr>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
+                  <th className="sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
                     S/N
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
                     FirstName
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     LastName
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     RegNo
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     MatricNo
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300  ltable-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300  ltable-cell">
+                    DOB
+                  </th>
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300  ltable-cell">
                     Gender
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300  table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300  table-cell">
                     Level
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     Hall
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     RoomNo
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     Dept
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     Webmail
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     Subunit
                   </th>
-                  <th className="px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
+                  <th className=" sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2 font-bold  bg-gray-200 text-gray-600 border border-gray-300 table-cell">
                     Actions
                   </th>
                 </tr>
@@ -122,9 +184,9 @@ const Admin = () => {
                 {member.map((arr, i) => (
                   <tr
                     key={i}
-                    className="bg-white lg:hover:bg-gray-100  mb-10 lg:mb-0"
+                    className="bg-white lg:hover:bg-gray-100  mb-10 lg:mb-0 "
                   >
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="bg-white w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
                       {i + 1}
                     </td>
                     <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
@@ -139,6 +201,9 @@ const Admin = () => {
                     </td>
                     <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
                       {arr.matricNo}
+                    </td>
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                      {arr.dob}
                     </td>
                     <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
                       {arr.Gender}
@@ -191,19 +256,21 @@ const Admin = () => {
                   </label>
                   <input
                     type="date"
-                    id="regNo"
-                    name="regNo"
+                    id="date"
+                    name="date"
                     className="bg-gray-50 border border-gray-300 border-solid w-[17rem]  focus:outline-[#FD8C00]   text-sm rounded   p-2.5"
                     placeholder="reg no."
-                    // onChange={formik.handleChange}
-                    // value={formik.values.regNo}
-                    // onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.date}
+                    onBlur={formik.handleBlur}
                   />
-                  {/* {formik.errors.regNo && formik.touched.regNo ? (
-                  <p className="text-red-500 text-sm ">{formik.errors.regNo}</p>
-                ) : (
-                  ""
-                )} */}
+                  {formik.errors.date && formik.touched.date ? (
+                    <p className="text-red-500 text-sm ">
+                      {formik.errors.date}
+                    </p>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="w-[17rem] ">
@@ -220,9 +287,9 @@ const Admin = () => {
                   className={
                     "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight "
                   }
-                  // onChange={formik.handleChange}
-                  // value={formik.values.serviceType}
-                  // onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.serviceType}
+                  onBlur={formik.handleBlur}
                   placeholder=""
                 >
                   <option
