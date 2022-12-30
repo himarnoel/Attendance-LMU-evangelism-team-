@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { link } from "./../schema/index";
+import { atten, link } from "./../schema/index";
 import { ToastContainer, toast } from "react-toastify";
 import { Oval } from "react-loader-spinner";
 import { useFormik } from "formik";
@@ -42,7 +42,7 @@ const Att = () => {
       regNo: "",
       serviceType: "",
     },
-    validationSchema: basicSchema,
+    validationSchema: atten,
     onSubmit: (values) => {
       const token = localStorage.getItem("token");
       window.scrollTo(0, 0);
@@ -149,31 +149,28 @@ const Att = () => {
                 </label>
                 <input
                   type="number"
-                  id="email"
-                  name="id"
-                  pattern="[0-9]{7}"
+                  id="regNo"
+                  name="regNo"
                   className="bg-gray-50 border border-gray-300 border-solid w-[17rem]  focus:outline-[#FD8C00]   text-sm rounded   p-2.5"
                   placeholder="reg no."
-                  onChange={(e) => {
-                    setregNo(e.target.value);
-                  }}
-                  value={regNo}
-                  required
+                  onChange={formik.handleChange}
+                  value={formik.values.regNo}
+                  onBlur={formik.handleBlur}
                 />
               </div>
             </div>
             <div className="w-[17rem]">
               {" "}
               <select
-                name="hall"
-                id="hall"
+                name="serviceType"
+                id="serviceType"
                 className="appearance-none border rounded w-full py-2 px-3 text-black leading-tight "
-                // onChange={formik.handleChange}
-                // value={formik.values.hall}
-                // onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.serviceType}
+                onBlur={formik.handleBlur}
                 placeholder=""
               >
-                <option value="" disabled selected className="text-red-500">
+                <option value="" disabled defaultValue className="text-red-500">
                   Select Service Type
                 </option>
                 <option value="Tuesday Preservice">Tuesday Preservice</option>
