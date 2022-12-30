@@ -18,6 +18,7 @@ const Att = () => {
     validationSchema: atten,
     onSubmit: (values) => {
       const token = localStorage.getItem("token");
+      console.log(token);
       window.scrollTo(0, 0);
       setload(true);
       axios
@@ -25,12 +26,13 @@ const Att = () => {
           `https://attendance-system.up.railway.app/attendance/enter`,
           values,
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { authorization: `Bearer ${token}` },
           }
         )
         .then((res) => {
           setload(false);
           toast.success("Login successful");
+          console.log(res);
           // formik.resetForm();
           // formik.setFormikState("", formik.values.serviceType);
         })
@@ -105,10 +107,10 @@ const Att = () => {
             <img src={logo} alt="" className="object-contain w-16" />
             <p className="text-[#FD8C00] text-[1rem] ">Attendance System</p>
             <button
-              onClick={() => navi("/join")}
-              className="py-[0.5rem] px-[0.4rem] text-xs bg-[#FD8C00] rounded-md text-white mr-2"
+              onClick={() => Logout()}
+              className="py-[0.5rem] px-[0.8rem] text-xs bg-[#FD8C00] rounded-md text-white mr-2"
             >
-              Join the team
+              Logout
             </button>
           </div>
         </div>
@@ -166,13 +168,13 @@ const Att = () => {
                 <option value="" disabled defaultValue className="text-red-500">
                   Select Service Type
                 </option>
-                <option value="Tuesday Preservice">Tuesday Preservice</option>
-                <option value="Thursday Preservice">Thursday Preservice</option>
-                <option value="Thursday Prayer Meeting">
+                <option value="tuesday preservice">Tuesday Preservice</option>
+                <option value="thursday preservice">Thursday Preservice</option>
+                <option value="thursday prayer meeting">
                   Thursday Prayer Meeting
                 </option>
-                <option value="Saturday Meeting">Saturday Meeting</option>
-                <option value="Sunday Preservice">Sunday Preservice</option>
+                <option value="saturday meeting">Saturday Meeting</option>
+                <option value="sunday preservice">Sunday Preservice</option>
               </select>
               {formik.errors.serviceType && formik.touched.serviceType ? (
                 <p className="text-red-500 text-sm ">
