@@ -4,7 +4,7 @@ body {
 }
 
 select {
-  color: gray !important;
+  color: gray ;
 }
 option[value=""][disabled] {
   display: none;

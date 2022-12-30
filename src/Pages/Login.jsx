@@ -22,9 +22,9 @@ const Login = () => {
         .post("https://attendance-system.up.railway.app/admin/login", values)
         .then((res) => {
           localStorage.setItem("token", res.data.token);
-          console.log("loged in ");
-          setload(false);
+                   setload(false);
           toast.success("Login successful");
+         
           window.location.reload();
         })
         .catch((e) => {

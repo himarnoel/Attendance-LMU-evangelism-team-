@@ -16,10 +16,11 @@ const Att = () => {
       serviceType: "",
     },
     validationSchema: atten,
+
     onSubmit: (values) => {
       const token = localStorage.getItem("token");
-      console.log(token);
       window.scrollTo(0, 0);
+
       setload(true);
       axios
         .post(
@@ -31,25 +32,28 @@ const Att = () => {
         )
         .then((res) => {
           setload(false);
-          toast.success("Login successful");
-          console.log(res);
-          // formik.resetForm();
-          // formik.setFormikState("", formik.values.serviceType);
+          if (res.data == "user not found") {
+            toast.warning("Please register");
+          } else if (res.data == "you have successfully signed in today") {
+            toast.info("Attendace already taken");
+          } else {
+            toast.success("success");
+          }
+          formik.setValues({
+            regNo: formik.initialValues.regNo,
+            serviceType: formik.values.serviceType,
+          });
+          // formik.handleChange("", formik.values.serviceType);
         })
         .catch((e) => {
-          // formik.setFormikState("", formik.values.serviceType);
-          console.log(e);
-          if (e.code.toString() == "ERR_NETWORK") {
-            toast.error(e.message.toString(), { position: "bottom-center" });
-            setload(false);
-          }
-
-          if (e.response.status >= 400) {
-            toast.error("Invalid username or pasword");
-            setload(false);
-          }
-
+          formik.setValues("", formik.values.serviceType);
           setload(false);
+          console.log(e.message);
+          if (e.message == "Network Error") {
+            toast.error(e.message);
+          } else {
+            toast.error("An error occured");
+          }
         });
     },
   });
@@ -151,7 +155,12 @@ const Att = () => {
               </div>
             </div>
             <div className="w-[17rem]">
-              {" "}
+              <label
+                htmlFor=""
+                className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
+              >
+                Pick Service
+              </label>
               <select
                 name="serviceType"
                 id="serviceType"
