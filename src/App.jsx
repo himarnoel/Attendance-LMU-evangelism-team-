@@ -8,13 +8,15 @@ import Register from "./Pages/Register";
 import "react-toastify/dist/ReactToastify.min.css";
 import Admin from "./Pages/Admin";
 import Login from "./Pages/Login";
+import Home from './Pages/Home';
 
 function App() {
   const token = localStorage.getItem("token");
   return (
     <>
       <Routes>
-        <Route element={<Register />} path="/" />
+      <Route element={<Home />} path="/" />
+        <Route element={<Register />} path="/join" />
         <Route element=  {token ? <Navigate to="/att" /> : <Login />}path="/login" />
         <Route
           path="/att"
