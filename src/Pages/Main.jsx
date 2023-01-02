@@ -8,10 +8,13 @@ import { Oval, ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
 import { saveAs } from "file-saver";
 import fileDownload from "js-file-download";
+import { writeXLSX } from "xlsx";
+import * as XLSX from "xlsx";
 const Main = () => {
   const navi = useNavigate();
   const [att, setatt] = useState([]);
   const [load, setload] = useState(false);
+  let global = [];
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +34,7 @@ const Main = () => {
     let month = today.toLocaleString("default", { month: "long" }).toString();
     let day = ("0" + today.getDate()).slice(-2).toString();
     let year = today.getFullYear().toString();
-    console.log(day, month, year, values.serviceType);
+
     axios
       .get(
         `${link}/getAttandanceJson?month=${month}&year=${year}&date=${day}&serviceType=${values.serviceType}`,
@@ -41,9 +44,7 @@ const Main = () => {
         }
       )
       .then((res) => {
-        console.log(res.data.totalAttendance);
         setatt(res.data.totalAttendance);
-        console.log(att);
 
         setload(false);
       })
@@ -51,6 +52,14 @@ const Main = () => {
         console.log(e);
         setload(false);
       });
+  };
+
+  const dowloadXlsx = () => {
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.json_to_sheet(att);
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    console.log("woshed", global);
+    XLSX.writeFile(wb, "MyExcel.xlsx");
   };
   return (
     <div className="">
@@ -72,16 +81,16 @@ const Main = () => {
       ) : (
         ""
       )}
-      <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
-        <div className="flex w-screen   shadow py-2 px-5 justify-between items-center">
+      <nav className="md:block hidden fixed w-full  top-0 bg-white ">
+        <div className="flex w-screen   shadow py-2 md:px-2 lg:px-6  lg:pr-10 xl:pr-10 justify-between items-center">
           <span className="flex items-center" id="logo">
             <img src={logo} alt="logo" className="object-contain w-14" />
-            <p className="text-[#FD8C00] text-[1.2rem] ">Evangelism Team</p>
+            <p className="text-[#FD8C00] text-[1.1rem] ">Evangelism Team</p>
           </span>
-          <p className="text-bold text-[#FD8C00] text-2xl">Mangement System</p>
+          <p className="text-bold text-[#FD8C00] text-xl">Mangement System</p>
           <div className="flex justify-between ">
             <button
-              className="bg-[#FD8C00] p-2 rounded  text-white hover:bg-[#fda335]"
+              className="bg-[#FD8C00] p-2 text-sm rounded  text-white hover:bg-[#fda335]"
               onClick={() => navi("/att")}
             >
               Take Attendance
@@ -92,26 +101,32 @@ const Main = () => {
 
       {/* Mobile Nav bar */}
 
-      <div className="lg:hidden fixed top-0 bg-white w-full">
-        <div className=" flex  shadow-md items-center py-2">
-          <img src={logo} alt="" className="object-contain w-16" />
-          <p className="text-[#FD8C00] text-[1.3rem] mx-auto  ">
+      <div className="md:hidden fixed top-0 bg-white w-full">
+        <div className=" flex  shadow-md items-center py-2 px-2">
+          <img src={logo} alt="" className="object-contain sm:w-16 w-14" />
+          <p className="text-[#FD8C00] text-[0.9rem] sm:text-[1.3rem] mx-auto  ">
             Management System
           </p>
+          <button
+            className="bg-[#FD8C00] sm:p-6 sm:px-0 sm:py-0 px-4  py-[0.4rem]  text-[0.7rem] sm:text-[1rem] rounded  text-white hover:bg-[#fda335]"
+            onClick={() => navi("/att")}
+          >
+            Take Attendance
+          </button>
         </div>
       </div>
 
-      <div className="pt-10 lg:px-10 md:px-10 px-2">
+      <div className="pt-10 lg:px-10 md:px-3 px-2">
         <form
           onSubmit={formik.handleSubmit}
-          className="mt-10  flex flex-col md:flex-row items-center justify-evenly  mx-auto md:mx-0  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[6rem] xl:w-full   bg-white shadow-lg rounded-lg "
+          className="mt-10  flex flex-col md:flex-row items-center justify-evenly  mx-auto md:mx-0  w-[20rem] h-[20rem]  md:w-full md:h-[8rem] lg:h-[6rem] sm:w-[24rem]    bg-white shadow-lg rounded-lg "
         >
-          <div className="h-full flex justify-evenly items-center flex-col md:flex-row  w-[20rem] xl:w-full md:items-center">
+          <div className="h-full flex justify-evenly items-center flex-col md:flex-row  w-[20rem] md:w-full md:items-center">
             <div>
               <div className="w-[17rem]">
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
+                  className="block mb-2 sm:text-sm text-xs font-medium text-gray-900 w-[17rem]"
                 >
                   Pick the date
                 </label>
@@ -119,7 +134,7 @@ const Main = () => {
                   type="date"
                   id="date"
                   name="date"
-                  className="bg-gray-50 border border-gray-300 border-solid w-[17rem] text-sm  focus:outline-[#FD8C00]   text-sm rounded   py-2 px-3"
+                  className="bg-gray-50 border border-gray-300 border-solid w-[17rem] sm:text-sm text-xs  focus:outline-[#FD8C00]    rounded   py-2 px-3"
                   placeholder="reg no."
                   onChange={formik.handleChange}
                   value={formik.values.date}
@@ -136,7 +151,7 @@ const Main = () => {
               {" "}
               <label
                 htmlFor=""
-                className="block mb-2 text-sm font-medium text-gray-900 w-[17rem]"
+                className="block mb-2 sm:text-sm text-xs font-medium text-gray-900 w-[17rem]"
               >
                 Pick Service
               </label>
@@ -144,7 +159,7 @@ const Main = () => {
                 name="serviceType"
                 id="serviceType"
                 className={
-                  "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight text-sm "
+                  "appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight sm:text-sm text-xs"
                 }
                 onChange={formik.handleChange}
                 value={formik.values.serviceType}
@@ -163,7 +178,7 @@ const Main = () => {
                 <option value="sunday preservice">Sunday Preservice</option>
               </select>
               {formik.errors.serviceType && formik.touched.serviceType ? (
-                <p className="text-red-500 text-sm ">
+                <p className="text-red-500 sm:text-sm text-xs">
                   {formik.errors.serviceType}
                 </p>
               ) : (
@@ -173,27 +188,48 @@ const Main = () => {
 
             <button
               type="submit"
-              className="px-5 py-3 bg-[#FD8C00] rounded text-white  text-sm hover:bg-[#fda335] text-center"
+              className="hidden md:block px-5 py-3 lg:px-5 lg:py-3 md:py-2 md:px-4 md:mt-7 lg:mt-0 bg-[#FD8C00] rounded text-white  text-xs hover:bg-[#fda335] text-center"
             >
               View
             </button>
-            {att.length != 0 ? (
+            {att.length !== 0 ? (
               <button
-                onClick={() => alert()}
-                className="px-5 py-3 bg-[#FD8C00] rounded text-white  text-sm hover:bg-[#fda335] text-center"
+                onClick={() => dowloadXlsx()}
+                type="button"
+                className="hidden md:block px-5 py-3 lg:px-5 lg:py-3 md:py-2 md:px-4 md:mt-7 lg:mt-0 bg-[#FD8C00] rounded text-white  text-xs hover:bg-[#fda335] text-center"
               >
                 Download
               </button>
             ) : (
               ""
             )}
+            <div className="md:hidden block flex">
+              {" "}
+              <button
+                type="submit"
+                className="mr-4 px-5 py-3 lg:px-5 lg:py-3 md:py-2 md:px-4 md:mt-7 lg:mt-0 bg-[#FD8C00] rounded text-white  text-xs hover:bg-[#fda335] text-center"
+              >
+                View
+              </button>
+              {att.length !== 0 ? (
+                <button
+                  onClick={() => dowloadXlsx()}
+                  type="button"
+                  className="sm: px-5 py-3 lg:px-5 lg:py-3 md:py-2 md:px-4 md:mt-7 lg:mt-0 bg-[#FD8C00] rounded text-white  text-xs hover:bg-[#fda335] text-center"
+                >
+                  Download
+                </button>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </form>
 
         <div className="flex flex-col lg:flex-row  justify-between mb-10  items-center ">
           {/*table */}
 
-          <div className="lg:w-[36rem] xl:w-full w-[90vw] md:w-full max-h-60 xl:max-h-72 mt-10 overflow-auto lg:text-lg rounded-md bg-white">
+          <div className="lg:w-full w-[90vw] md:w-full max-h-60 xl:max-h-72 mt-10 overflow-auto lg:text-lg rounded-md bg-white">
             <table className=" w-full text-sm">
               <thead className=" sticky top-0">
                 <tr>
