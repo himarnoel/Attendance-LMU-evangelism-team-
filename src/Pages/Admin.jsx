@@ -210,48 +210,48 @@ const Admin = () => {
                     key={i}
                     className="bg-white lg:hover:bg-gray-100  mb-10 lg:mb-0 "
                   >
-                    <td className="bg-white w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="bg-white w-auto px-[0.4rem] py-[0.2rem] md:p-2 text border border-b text-center ">
                       {i + 1}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.firstname}
                     </td>
 
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.lastname}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.regNo}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.matricNo}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.dob}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.Gender}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.level}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.hall}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.roomNO}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.department}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.webmail.split("@lmu.edu.ng")}
                     </td>
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 text-gray-800  border border-b text-center ">
                       {arr.Subunit}
                     </td>
 
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2  flex text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2  flex text-gray-800  border border-b text-center ">
                       <button className="p-2 bg-yellow-500 rounded  ">
                         Edit
                       </button>
