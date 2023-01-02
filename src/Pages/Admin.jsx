@@ -6,6 +6,8 @@ import { download, link } from "./../schema/index";
 import { ToastContainer } from "react-toastify";
 import { Oval, ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
+import { saveAs } from "file-saver";
+import fileDownload from "js-file-download";
 const Admin = () => {
   const navi = useNavigate();
   const [member, setmember] = useState([]);
@@ -40,17 +42,39 @@ const Admin = () => {
       serviceType: "",
     },
     validationSchema: download,
-    onsubmit: (values) => {
+    onSubmit: (values) => {
       Download(values);
     },
   });
   console.log(formik.values);
   const Download = (values) => {
+    const token = localStorage.getItem("token");
     let today = new Date(values.date);
     let month = today.toLocaleString("default", { month: "long" }).toString();
     let day = ("0" + today.getDate()).slice(-2).toString();
     let year = today.getFullYear().toString();
-    axios.get(`${link}/getallattendance?month=${month}&year=${year}&date=&${day}&serviceType=${values.serviceType}`);
+    axios
+      .get(
+        `${link}/getallattendance?month=${month}&year=${year}&date=&${day}&serviceType=${values.serviceType}`,
+
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        // saveAs(res.data, `attendance ${day}-${month}-${year}`);
+        let blob = new Blob([res.data], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+        fileDownload(blob, "comx.xlsx");
+        // const url = window.URL.createObjectURL(new Blob([res.data]));
+        // const link = document.createElement("a");
+        // link.href = url;
+        // link.download = `attendance ${day}-${month}-${year}.xlsx`;
+        // // document.body.appendChild(link);
+        // link.click();
+      });
   };
   return (
     <div className="">
@@ -227,7 +251,7 @@ const Admin = () => {
                       {arr.Subunit}
                     </td>
 
-                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2 flex text-gray-800 text-center border border-b text-center ">
+                    <td className="w-auto px-[0.4rem] py-[0.2rem] md:p-2 gap-x-2  flex text-gray-800 text-center border border-b text-center ">
                       <button className="p-2 bg-yellow-500 rounded  ">
                         Edit
                       </button>
@@ -241,7 +265,7 @@ const Admin = () => {
             </table>
           </div>
           <form
-            // onSubmit={formik.handleSubmit}
+            onSubmit={formik.handleSubmit}
             className="mt-10  flex flex-col items-center justify-evenly  mx-auto md:mx-0  w-[20rem] h-[20rem]  md:w-[26rem] md:h-[22rem] lg:w-[22rem] lg:h-[20rem] sm:w-[24rem] xl:h-[20rem] xl:w-[25rem]   bg-white shadow-lg rounded-lg "
           >
             <div className="h-full flex justify-evenly items-center flex-col  w-[17rem]">
@@ -310,17 +334,18 @@ const Admin = () => {
                   <option value="saturday meeting">Saturday Meeting</option>
                   <option value="sunday preservice">Sunday Preservice</option>
                 </select>
-                {/* {formik.errors.serviceType && formik.touched.serviceType ? (
-                <p className="text-red-500 text-sm ">
-                  {formik.errors.serviceType}
-                </p>
-              ) : (
-                ""
-              )} */}
+                {formik.errors.serviceType && formik.touched.serviceType ? (
+                  <p className="text-red-500 text-sm ">
+                    {formik.errors.serviceType}
+                  </p>
+                ) : (
+                  ""
+                )}
               </div>
+
               <button
                 type="submit"
-                className="px-5 py-3 bg-[#FD8C00] rounded text-white w-full hover:bg-[#fda335]"
+                className="px-5 py-3 bg-[#FD8C00] rounded text-white w-full hover:bg-[#fda335] text-center"
               >
                 Download
               </button>

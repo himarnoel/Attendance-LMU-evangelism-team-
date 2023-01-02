@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import Admin from "./Pages/Admin";
 import Login from "./Pages/Login";
 import Home from './Pages/Home';
+import Main from "./Pages/Main";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -25,7 +26,11 @@ function App() {
 
         <Route
           path="/admin"
-          element={token ? <Admin /> : <Navigate to="/login" />}
+          element={token ? <Main /> : <Navigate to="/login" />}
+        />
+         <Route
+          path="*"
+          element={<Navigate to="/"/>}
         />
       </Routes>
     </>
