@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { download, link } from "./../schema/index";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Oval, ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
 import { saveAs } from "file-saver";
@@ -45,6 +45,10 @@ const Main = () => {
       )
       .then((res) => {
         setatt(res.data.totalAttendance);
+        if (res.data.totalAttendance.length == 0) {
+          toast.warning(` No attendance taken `);
+        }
+
         setload(false);
       })
       .catch((e) => {
@@ -62,7 +66,7 @@ const Main = () => {
   };
   return (
     <div className="">
-      <ToastContainer autoClose={1200} />
+      <ToastContainer autoClose={1200} theme="colored" />
       {load ? (
         <div className="w-screen  h-screen  bg-white/90 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
           <ThreeDots

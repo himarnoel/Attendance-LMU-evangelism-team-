@@ -211,7 +211,7 @@ const Register = () => {
               }
               id="matricNo"
               type="text"
-              placeholder="e.g computer science"
+              placeholder="e.g 19CD006099"
               onChange={formik.handleChange}
               value={formik.values.matricNo}
               onBlur={formik.handleBlur}
