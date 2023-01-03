@@ -34,9 +34,7 @@ const Att = () => {
           setload(false);
           if (res.data == "user not found") {
             toast.warning("Please register");
-          } else if (res.data == "you have successfully signed in today") {
-            toast.info("Attendace already taken");
-          } else {
+          }  else {
             toast.success("success");
           }
           formik.setValues({
@@ -46,11 +44,16 @@ const Att = () => {
           // formik.handleChange("", formik.values.serviceType);
         })
         .catch((e) => {
-          formik.setValues("", formik.values.serviceType);
+          formik.setValues({
+            regNo: formik.initialValues.regNo,
+            serviceType: formik.values.serviceType,
+          });
           setload(false);
-          console.log(e.message);
+          console.log(e);
           if (e.message == "Network Error") {
             toast.error(e.message);
+          }else if (e.response.data == "you have already signed today ") {
+            toast.info("Attendace already taken");
           } else {
             toast.error("An error occured");
           }
