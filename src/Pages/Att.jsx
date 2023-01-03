@@ -35,7 +35,7 @@ const Att = () => {
           if (res.data == "user not found") {
             toast.warning("Please register");
           }  else {
-            toast.success("success");
+            toast.success("Attendance Captured");
           }
           formik.setValues({
             regNo: formik.initialValues.regNo,
