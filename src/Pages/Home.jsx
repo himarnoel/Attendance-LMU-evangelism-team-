@@ -16,7 +16,7 @@ const Home = () => {
         <div className="">
           <p className="mb-2 text-xl md:text-2xl">
             {" "}
-            Welcome to Envangelism Unit{" "}
+            Welcome to Evangelism Unit{" "}
           </p>
           <p className="text-sm ml-2 italic">
             .....reaching out to transform lives
