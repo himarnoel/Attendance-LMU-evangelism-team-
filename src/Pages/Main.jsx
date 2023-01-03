@@ -228,7 +228,7 @@ const Main = () => {
           {/*table */}
 
           <div className="w-full max-h-60 xl:max-h-72 mt-10 overflow-auto lg:text-lg rounded-md bg-white">
-            <table className=" w-full text-sm">
+            <table className=" w-full sm:text-sm text-xs">
               <thead className=" sticky top-0">
                 <tr>
                   <th className="sticky top-0 px-[0.4rem] py-[0.2rem] md:p-2  font-bold  bg-gray-200 text-gray-600 border border-gray-300 ">
