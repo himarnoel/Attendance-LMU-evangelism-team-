@@ -45,7 +45,6 @@ const Main = () => {
       )
       .then((res) => {
         setatt(res.data.totalAttendance);
-
         setload(false);
       })
       .catch((e) => {
