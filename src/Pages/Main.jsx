@@ -66,7 +66,7 @@ const Main = () => {
   };
   return (
     <div className="">
-      <ToastContainer autoClose={1200} theme="colored" />
+      <ToastContainer autoClose={1200}  />
       {load ? (
         <div className="w-screen  h-screen  bg-white/90 absolute flex flex-col items-center justify-center top-0 left-0  z-10 ">
           <ThreeDots
