@@ -117,7 +117,7 @@ const Main = () => {
       <div className="pt-10 lg:px-10 md:px-3 px-2">
         <form
           onSubmit={formik.handleSubmit}
-          className="mt-10  flex flex-col md:flex-row items-center justify-evenly  mx-auto md:mx-0   h-[15rem] w-full md:h-[8rem] lg:h-[6rem] sm:w-[24rem]    bg-white shadow-lg rounded-lg "
+          className="mt-10  flex flex-col md:flex-row items-center justify-evenly  mx-auto md:mx-0   h-[15rem] md:w-full md:h-[8rem] lg:h-[6rem] sm:w-[24rem]    bg-white shadow-lg rounded-lg "
         >
           <div className="h-full flex justify-evenly items-center flex-col md:flex-row  w-[20rem] md:w-full md:items-center">
             <div>
