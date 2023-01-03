@@ -71,8 +71,6 @@ const Main = () => {
             width="100"
             radius="9"
             color="#FD8C00"
-            wrapperStyle={{}}
-            wrapperClass=""
             visible={true}
             strokeWidth={2}
             strokeWidthSecondary={2}
@@ -102,13 +100,13 @@ const Main = () => {
       {/* Mobile Nav bar */}
 
       <div className="md:hidden fixed top-0 bg-white w-full">
-        <div className=" flex  shadow-md items-center py-2 px-2">
-          <img src={logo} alt="" className="object-contain sm:w-16 w-14" />
-          <p className="text-[#FD8C00] text-[0.9rem] sm:text-[1.3rem] mx-auto  ">
+        <div className=" flex  shadow-md items-center py-2 sm:px-2 pr-[0.8rem]">
+          <img src={logo} alt="" className="object-contain sm:w-16 w-12" />
+          <p className="text-[#FD8C00] text-[0.8rem] sm:text-[1.3rem] mx-auto  ">
             Management System
           </p>
           <button
-            className="bg-[#FD8C00] sm:p-6 sm:px-0 sm:py-0 px-4  py-[0.4rem]  text-[0.7rem] sm:text-[1rem] rounded  text-white hover:bg-[#fda335]"
+            className="bg-[#FD8C00] sm:p-6 sm:px-0 sm:py-0 px-3  py-[0.4rem]  text-[0.6rem] sm:text-[1rem] rounded  text-white hover:bg-[#fda335]"
             onClick={() => navi("/att")}
           >
             Take Attendance
@@ -119,7 +117,7 @@ const Main = () => {
       <div className="pt-10 lg:px-10 md:px-3 px-2">
         <form
           onSubmit={formik.handleSubmit}
-          className="mt-10  flex flex-col md:flex-row items-center justify-evenly  mx-auto md:mx-0  w-[20rem] h-[20rem]  md:w-full md:h-[8rem] lg:h-[6rem] sm:w-[24rem]    bg-white shadow-lg rounded-lg "
+          className="mt-10  flex flex-col md:flex-row items-center justify-evenly  mx-auto md:mx-0   h-[15rem] w-full md:h-[8rem] lg:h-[6rem] sm:w-[24rem]    bg-white shadow-lg rounded-lg "
         >
           <div className="h-full flex justify-evenly items-center flex-col md:flex-row  w-[20rem] md:w-full md:items-center">
             <div>
@@ -229,7 +227,7 @@ const Main = () => {
         <div className="flex flex-col lg:flex-row  justify-between mb-10  items-center ">
           {/*table */}
 
-          <div className="lg:w-full w-[90vw] md:w-full max-h-60 xl:max-h-72 mt-10 overflow-auto lg:text-lg rounded-md bg-white">
+          <div className="w-full max-h-60 xl:max-h-72 mt-10 overflow-auto lg:text-lg rounded-md bg-white">
             <table className=" w-full text-sm">
               <thead className=" sticky top-0">
                 <tr>
