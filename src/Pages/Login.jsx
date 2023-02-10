@@ -66,10 +66,11 @@ const Login = () => {
       <div className="w-screen h-screen flex  flex-col justify-center items-center">
         <nav className="lg:block hidden fixed w-full  top-0 bg-white ">
           <div className="flex w-screen   shadow py-2 px-3  items-center">
-            <span className="flex items-center" id="logo">
+          <Link to="/">     <span className="flex items-center" id="logo">
               <img src={logo} alt="logo" className="object-contain w-14" />
               <p className="text-[#FD8C00] text-[1.2rem] ">Evangelism Team</p>
             </span>
+            </Link > 
             <p className="text-bold text-[#FD8C00] text-2xl mx-auto">
               Admin Login{" "}
             </p>

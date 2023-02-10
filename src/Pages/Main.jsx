@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import { download, link } from "./../schema/index";
 import { ToastContainer, toast } from "react-toastify";
@@ -84,10 +84,10 @@ const Main = () => {
       )}
       <nav className="md:block hidden fixed w-full  top-0 bg-white ">
         <div className="flex w-screen   shadow py-2 md:px-2 lg:px-6  lg:pr-10 xl:pr-10 justify-between items-center">
-          <span className="flex items-center" id="logo">
+        <Link to="/">    <span className="flex items-center" id="logo">
             <img src={logo} alt="logo" className="object-contain w-14" />
             <p className="text-[#FD8C00] text-[1.1rem] ">Evangelism Team</p>
-          </span>
+          </span> </Link > 
           <p className="text-bold text-[#FD8C00] text-xl">Mangement System</p>
           <div className="flex justify-between ">
             <button
